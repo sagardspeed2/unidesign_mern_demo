@@ -1,4 +1,4 @@
-global.SALT_KEY = 'sJTpWGMQLKpwrz4R2ukjrC2XMG_Yd5';
+global.SALT_KEY = 'sJTpWGMQLKpwrz4R2ukFW6825_Yd5';
 require('dotenv').config();
 
 const dev = {

@@ -63,15 +63,21 @@ process.on('SIGINT', () => {
     });
 });
 
+// Loading Models
+const User = require('./models/User');
+const Department = require('./models/Department');
+
 /**
  * Here Load All Route Files
  */
-const IndexRoute = require('./_routes/IndexRoute');
+const IndexRoute = require('./routes/IndexRoute');
+const UserRoute = require('./routes/UserRoute');
 
 /**
  * Here Define All Main Route
  */
 app.use('/', IndexRoute);
+app.use('/user', UserRoute);
 
 /**
  * Export App

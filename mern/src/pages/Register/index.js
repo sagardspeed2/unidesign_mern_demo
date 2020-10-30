@@ -20,12 +20,14 @@ const Register = () => {
 
 	// element object
 	const [element, setElement] = useState({
+		username: '',
 		email: '',
 		password: ''
 	});
 
 	// error object
 	const [errors, setError] = useState({
+		username: '',
 		email: '',
 		password: ''
 	})
@@ -51,8 +53,8 @@ const Register = () => {
 
 	// set submit btn status
 	const set_register_btn_state = () => {
-		if (element.email !== '' && element.password !== '') {
-			if (errors.email === '' && errors.password === '') {
+		if (element.username !== '' && element.email !== '' && element.password !== '') {
+			if (errors.username === '' && errors.email === '' && errors.password === '') {
 				set_register_btn_status(false);
 			} else {
 				set_register_btn_status(true);
@@ -64,8 +66,8 @@ const Register = () => {
 
 	// Register User
 	const register_user = () => {
-		if (element.email !== '' && element.password !== '') {
-			if (errors.email === '' && errors.password === '') {
+		if (element.username !== '' && element.email !== '' && element.password !== '') {
+			if (errors.username === '' && errors.email === '' && errors.password === '') {
 				dispatch(userAction.registerUser(element));
 			}
 		}
@@ -86,11 +88,30 @@ const Register = () => {
 						<hr />
 						<Form>
 							<FormGroup>
-								<Label for="exampleEmail">Email</Label>
+								<Label for="username">Username</Label>
+								<Input 
+									type="username" 
+									name="username" 
+									id="username"
+									placeholder="Enter your username"
+									value={element.username}
+									onChange={handleChange}
+									invalid={errors.username.length > 0 ? true : false}
+									valid={
+										(errors.username.length === 0) && (element.username) ? true : false
+									}
+									required />
+								<FormText color="danger">
+									{errors.username}
+								</FormText>
+							</FormGroup>
+
+							<FormGroup>
+								<Label for="email">Email</Label>
 								<Input 
 									type="email" 
 									name="email" 
-									id="exampleEmail"
+									id="email"
 									placeholder="Enter your email"
 									value={element.email}
 									onChange={handleChange}
@@ -105,11 +126,11 @@ const Register = () => {
 							</FormGroup>
 							
 							<FormGroup>
-								<Label for="examplePassword">Password</Label>
+								<Label for="password">Password</Label>
 								<Input 
 									type="password" 
 									name="password" 
-									id="examplePassword"
+									id="password"
 									placeholder="Enter your password" 
 									value={element.password}
 									onChange={handleChange}
