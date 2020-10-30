@@ -1,0 +1,5 @@
+export const userConstant = {
+	REFRESH: 'USER_REFRESH',
+	IS_LOGGING: 'USER_IS_LOGGING',
+	IS_TRIED: 'USER_IS_TRIED'
+};
