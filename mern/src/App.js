@@ -2,6 +2,8 @@ import React, {useEffect} from 'react';
 import { Router } from 'react-router-dom';
 import { useDispatch } from "react-redux";
 
+import { Loader } from './components/Loader';
+
 import { history } from './_helpers';
 
 import { userAction } from './_actions';
@@ -19,6 +21,7 @@ function App() {
 
 	return (
 		<>
+			<Loader />
 			<Router history={history}>
 				<>
 					<Routes />

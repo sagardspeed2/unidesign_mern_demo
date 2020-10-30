@@ -18,6 +18,7 @@ module.exports = {
         "react"
     ],
     "rules": {
+		"no-useless-escape": 0,
 		"indent": [2, "tab", { "SwitchCase": 1, "VariableDeclarator": 1 }],
         "no-tabs": 0,
         "react/prop-types": 0,

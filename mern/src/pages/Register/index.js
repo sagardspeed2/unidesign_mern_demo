@@ -12,12 +12,12 @@ import { check_validate_register_login_form_data } from '../../_helpers';
 
 import { userAction } from '../../_actions';
 
-import './Login.scss';
+import './Register.scss';
 
-const Login = () => {
+const Register = () => {
 
 	const dispatch = useDispatch();
-	
+
 	// element object
 	const [element, setElement] = useState({
 		email: '',
@@ -31,7 +31,7 @@ const Login = () => {
 	})
 
 	// submit btn status
-	const [login_btn_disable, set_login_btn_status] = useState(true);
+	const [register_btn_disable, set_register_btn_status] = useState(true);
 
 	// handle input change - errors - submit btn
 	const handleChange = (event) => {
@@ -46,26 +46,27 @@ const Login = () => {
 
 		setError(temp_error);
 
-		set_login_btn_stat();
+		set_register_btn_state();
 	}
 
 	// set submit btn status
-	const set_login_btn_stat = () => {
+	const set_register_btn_state = () => {
 		if (element.email !== '' && element.password !== '') {
 			if (errors.email === '' && errors.password === '') {
-				set_login_btn_status(false);
+				set_register_btn_status(false);
 			} else {
-				set_login_btn_status(true);
+				set_register_btn_status(true);
 			}
 		} else {
-			set_login_btn_status(true);
+			set_register_btn_status(true);
 		}
 	}
 
-	const login_user = () => {
+	// Register User
+	const register_user = () => {
 		if (element.email !== '' && element.password !== '') {
 			if (errors.email === '' && errors.password === '') {
-				dispatch(userAction.loginUser(element));
+				dispatch(userAction.registerUser(element));
 			}
 		}
 	}
@@ -79,14 +80,11 @@ const Login = () => {
 				transitionAppearTimeout={0}
 				transitionEnter={false}
 				transitionLeave={false}>
-
-				<div className="login__page formBox">
+				<div className="register__page formBox">
 					<Card className="main-card mb-3">
-						<CardTitle className="mb-3">Login</CardTitle>
+						<CardTitle className="mb-3">Register</CardTitle>
 						<hr />
-
 						<Form>
-							{/* Email input */}
 							<FormGroup>
 								<Label for="exampleEmail">Email</Label>
 								<Input 
@@ -105,8 +103,7 @@ const Login = () => {
 									{errors.email}
 								</FormText>
 							</FormGroup>
-
-							{/* Password Input */}
+							
 							<FormGroup>
 								<Label for="examplePassword">Password</Label>
 								<Input 
@@ -125,22 +122,20 @@ const Login = () => {
 									{errors.password}
 								</FormText>
 							</FormGroup>
-
-							{/* Login btn */}
+							
 							<div className="d-flex align-items-center justify-content-between p-1">
 								<Button 
 									type="button" 
 									color="primary"
-									disabled ={login_btn_disable}
-									onClick={login_user} >
-									Login
+									disabled ={register_btn_disable}
+									onClick={register_user} >
+									Register
 								</Button>
 								<FormGroup className="m-0">
-									<Link to={`register`}>Register ?</Link>
+									<Link to={`login`}>Login ?</Link>
 								</FormGroup>
 							</div>
 						</Form>
-
 					</Card>
 				</div>
 			</ReactCSSTransitionGroup>
@@ -156,6 +151,6 @@ const mapStatetoProps = state => {
 	};
 }
 
-const temp = connect(mapStatetoProps)(Login);
+const temp = connect(mapStatetoProps)(Register);
 
-export { temp as Login };
+export { temp as Register };

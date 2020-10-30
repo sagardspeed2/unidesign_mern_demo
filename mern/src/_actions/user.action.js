@@ -1,8 +1,12 @@
 import { userConstant } from '../_constants';
 import { userService } from '../_services';
+import { history } from '../_helpers';
+import { loaderAction } from './';
 
 export const userAction = {
-	refreshPage
+	refreshPage,
+	loginUser,
+	registerUser
 };
 
 /**
@@ -47,3 +51,35 @@ function setIsTried() {
 		type: userConstant.IS_TRIED,
 	}
 }
+
+/**
+ * Login User
+ */
+function loginUser (data) {
+	console.log(data);
+}
+
+/**
+ * Register New User
+ */
+function registerUser (data) {
+	return async dispatch => {
+		dispatch(loaderOpen());
+		await userService.registerUser(data)
+			.then(
+				res => {
+					history.push('/login');
+					console.log(res);
+				}
+			)
+			.finally (
+				() => { dispatch(loaderClose()) }
+			);
+	}
+}
+
+/**
+ * Handle Loading
+ */
+function loaderOpen() { return loaderAction.open() }
+function loaderClose() { return loaderAction.close() }
