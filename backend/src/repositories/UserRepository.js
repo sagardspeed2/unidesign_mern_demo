@@ -9,15 +9,16 @@ const config = require('../config');
 /**
  * Get a user by username
  */
-exports.getByUserName = async(username) => {
+exports.get_user_by_userName = async(username) => {
     return await User.findOne({Username: username});
 };
 
 /**
  * Get a user by email
  */
-exports.getByEmail = async(email) => {
-    return await User.findOne({Email: email});
+exports.get_user_by_email = async(email) => {
+	return await User.findOne({Email: email}, 'userId Username Email department CreatedAt')
+		.populate('department');
 };
 
 /**
@@ -29,10 +30,27 @@ exports.create = async (data) => {
 		
 		user.Username = data.username;
         user.Email = data.email;
-        user.Password = data.Password;
+		user.Password = data.password;
+		user.department = data.department;
 
 		return await user.save();
     } catch(error) {
         throw error;
     }
 };
+
+/**
+ * Sign in User
+ */
+exports.user_signin = async (email, password) => {
+	try {
+		let res = await User.findOne({
+			Email: email, Password: password
+		}, 'userId Username Email department CreatedAt')
+		.populate('department');
+		
+		return res;
+	} catch (error) {
+		throw error;
+	}
+}

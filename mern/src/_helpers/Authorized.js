@@ -10,10 +10,10 @@ export const isAuth = () => {
 
 export const getUser = () => {
 	const state = store.getState();
-	const { user } = state.authentication;
+	const { user } = state.userReducer;
 	return user;
 };
 
 export const getToken = () => {
-	return sessionStorage.getItem('token');
+	return localStorage.getItem('token');
 };

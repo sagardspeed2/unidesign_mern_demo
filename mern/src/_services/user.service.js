@@ -5,6 +5,7 @@ import { getToken } from '../_helpers';
 export const userService = {
 	getUserEmailByToken,
 	getUserByEmail,
+	loginUser,
 	registerUser
 };
 
@@ -25,6 +26,18 @@ async function getUserByEmail(email) {
 	const url = `${config.apiHost}/user/email/${email}`
 	axios.defaults.headers.common['x-access-token'] = getToken();
 	return await axios.get(url);
+}
+
+/**
+ * Login User
+ */
+async function loginUser (data) {
+	const url = `${config.apiHost}/user/signin`;
+	const body = {
+		data
+	};
+	
+	return await axios.post(url, body);
 }
 
 /**

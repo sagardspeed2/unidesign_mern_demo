@@ -1,11 +1,17 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
+import { TopNavbar } from '../../components/Navbar';
+import { RequestForm } from '../../components/NewRequestForm';
+
 const Dashboard = () => {
 	return (
-		<div>
-			Dashboard
-		</div>
+		<>
+			<TopNavbar />
+			<div>
+				<RequestForm />
+			</div>
+		</>
 	)
 }
 

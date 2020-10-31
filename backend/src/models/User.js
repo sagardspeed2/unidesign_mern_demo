@@ -30,7 +30,7 @@ const schema = new Schema({
 	},
 	department: {
 		type: mongoose.Schema.Types.ObjectId,
-        ref: 'Departments',
+        ref: 'Department',
         required: true
 	},
 	CreatedAt: {

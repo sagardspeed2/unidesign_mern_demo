@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { connect, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
@@ -7,14 +7,15 @@ import {
 	Form, FormGroup, Label, Input, FormText,
 	Button
 } from 'reactstrap';
+import Select from 'react-select';
 
-import { check_validate_register_login_form_data } from '../../_helpers';
+import { check_validate_register_login_form_data, alertMessage } from '../../_helpers';
 
-import { userAction } from '../../_actions';
+import { userAction, departmentAction } from '../../_actions';
 
 import './Register.scss';
 
-const Register = () => {
+const Register = (props) => {
 
 	const dispatch = useDispatch();
 
@@ -22,7 +23,8 @@ const Register = () => {
 	const [element, setElement] = useState({
 		username: '',
 		email: '',
-		password: ''
+		password: '',
+		department: ''
 	});
 
 	// error object
@@ -35,9 +37,14 @@ const Register = () => {
 	// submit btn status
 	const [register_btn_disable, set_register_btn_status] = useState(true);
 
+	useEffect(() => {
+		dispatch(departmentAction.get_all_department());
+	}, []);
+
 	// handle input change - errors - submit btn
 	const handleChange = (event) => {
 		const {name, value} = event.target;
+		
 		setElement({
 			...element,
 			[name]: value
@@ -49,6 +56,14 @@ const Register = () => {
 		setError(temp_error);
 
 		set_register_btn_state();
+	}
+
+	// handle department change
+	const handle_department_change = selected_opiton => {
+		setElement({
+			...element,
+			'department': selected_opiton.value
+		});
 	}
 
 	// set submit btn status
@@ -66,6 +81,11 @@ const Register = () => {
 
 	// Register User
 	const register_user = () => {
+		if (element.department === '') {
+			alertMessage('error', 'Please select department!');
+			return false;
+		}
+
 		if (element.username !== '' && element.email !== '' && element.password !== '') {
 			if (errors.username === '' && errors.email === '' && errors.password === '') {
 				dispatch(userAction.registerUser(element));
@@ -143,6 +163,26 @@ const Register = () => {
 									{errors.password}
 								</FormText>
 							</FormGroup>
+
+							<FormGroup>
+								<Label for="department">Department</Label>
+								<Select
+									className="basic-single"
+									classNamePrefix="select"
+									name="color"
+									onChange={handle_department_change}
+									options={
+										props.departments && props.departments.map(element => {
+											return (
+												{
+													value: element._id,
+													label: element.DepartmentName
+												}
+											)
+										})
+									}
+								/>
+							</FormGroup>
 							
 							<div className="d-flex align-items-center justify-content-between p-1">
 								<Button 
@@ -166,9 +206,11 @@ const Register = () => {
 
 const mapStatetoProps = state => {
 	const { isloggingIn } = state.userReducer;
+	const { departments } = state.departmentReducer;
 
 	return {
-		isloggingIn
+		isloggingIn,
+		departments
 	};
 }
 

@@ -66,18 +66,23 @@ process.on('SIGINT', () => {
 // Loading Models
 const User = require('./models/User');
 const Department = require('./models/Department');
+const Request = require('./models/Request');
 
 /**
  * Here Load All Route Files
  */
 const IndexRoute = require('./routes/IndexRoute');
 const UserRoute = require('./routes/UserRoute');
+const DepartmentRoute = require('./routes/DepartmentRoute');
+const RequestRoute = require('./routes/RequestRoute');
 
 /**
  * Here Define All Main Route
  */
 app.use('/', IndexRoute);
 app.use('/user', UserRoute);
+app.use('/department', DepartmentRoute);
+app.use('/request', RequestRoute);
 
 /**
  * Export App

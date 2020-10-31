@@ -1,12 +1,13 @@
 import { userConstant } from '../_constants';
 import { userService } from '../_services';
-import { history } from '../_helpers';
+import { history, alertMessage } from '../_helpers';
 import { loaderAction } from './';
 
 export const userAction = {
 	refreshPage,
 	loginUser,
-	registerUser
+	registerUser,
+	logout
 };
 
 /**
@@ -15,27 +16,13 @@ export const userAction = {
 function refreshPage() {
 	return async dispatch => {
 		try {
-			dispatch(setIsLogging(true));
 			const Email = await userService.getUserEmailByToken();
 			const user = await userService.getUserByEmail(Email);
-			dispatch(setIsLogging(false));
-			dispatch(refresh(user));
+			dispatch(refresh(user.data));
 		} catch (error) {
-			dispatch(setIsLogging(false));
-			dispatch(setIsTried())
-			throw (error)
+			localStorage.removeItem('token');
+			throw (error);
 		}
-		
-	}
-}
-
-/**
- * Set User Process status
- */
-function setIsLogging(isLogging) {
-	return { 
-		type: userConstant.IS_LOGGING,
-		isLogging
 	}
 }
 
@@ -46,17 +33,39 @@ function refresh(user) {
 	return { type: userConstant.REFRESH, user }; 
 }
 
-function setIsTried() {
-	return { 
-		type: userConstant.IS_TRIED,
-	}
-}
-
 /**
  * Login User
  */
 function loginUser (data) {
-	console.log(data);
+	return async dispatch => {
+		dispatch(loaderOpen());
+
+		await userService.loginUser(data)
+			.then(
+				res => {
+					const token = res.data.token;
+					const user = res.data.user;
+					
+					localStorage.setItem('token', token);
+
+					dispatch(success(user));
+
+					history.push('/dashboard');
+				},
+				error => {
+					alertMessage('error', error.response.data.message);
+					throw(error)
+				}
+			)
+			.finally (
+				() => { dispatch(loaderClose()) }
+			);
+	}
+
+}
+
+function success(user) { 
+	return { type: userConstant.LOGIN_SUCCESS, user }; 
 }
 
 /**
@@ -70,12 +79,29 @@ function registerUser (data) {
 				res => {
 					history.push('/login');
 					console.log(res);
+				},
+				error => {
+					alertMessage('error', error.response.data.errors ? error.response.data.errors[0].message : error.response.data.message);
 				}
 			)
 			.finally (
 				() => { dispatch(loaderClose()) }
 			);
 	}
+}
+
+/**
+ * Handle User Logout
+ */
+function logout () {
+	return async dispatch => {
+		dispatch(setIsLogout())
+	}
+}
+
+function setIsLogout() {
+	localStorage.clear();
+	return { type: userConstant.LOGOUT };
 }
 
 /**
