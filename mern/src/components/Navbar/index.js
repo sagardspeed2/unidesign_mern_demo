@@ -55,6 +55,12 @@ const TopNavbar = () => {
 								className="navbar__link"
 								to="/rejected-request">Rejected</NavLink>
 						</NavItem>
+						<NavItem>
+							<NavLink 
+								activeClassName="navbar__link--active"
+								className="navbar__link"
+								to="/request">Request (for Approval)</NavLink>
+						</NavItem>
 					</Nav>
 					<NavbarText className="notification__ico"><FontAwesomeIcon icon={faBell} /></NavbarText>
 					<NavbarText className="ml-3 logout__btn" onClick={handle_logout}>Logout</NavbarText>

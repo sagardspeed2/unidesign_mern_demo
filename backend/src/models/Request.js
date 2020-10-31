@@ -27,7 +27,7 @@ const schema = new Schema({
 	},
 	status: {
 		type: String,
-		enum: ['Approves', 'Pending', 'Rejected'],
+		enum: ['Approved', 'Pending', 'Rejected'],
 		default: 'Pending',
 	},
 	createdAt: {
