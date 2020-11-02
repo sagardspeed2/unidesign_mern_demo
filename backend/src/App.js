@@ -74,6 +74,7 @@ process.on('SIGINT', () => {
 const User = require('./models/User');
 const Department = require('./models/Department');
 const Request = require('./models/Request');
+const Notification = require('./models/Notification');
 
 /**
  * Here Load All Route Files
@@ -81,6 +82,7 @@ const Request = require('./models/Request');
 const UserRoute = require('./routes/UserRoute');
 const DepartmentRoute = require('./routes/DepartmentRoute');
 const RequestRoute = require('./routes/RequestRoute');
+const NotificationRoute = require('./routes/NotificationRoute');
 
 /**
  * Here Define All Main Route
@@ -88,6 +90,7 @@ const RequestRoute = require('./routes/RequestRoute');
 app.use('/user', UserRoute);
 app.use('/department', DepartmentRoute);
 app.use('/request', RequestRoute);
+app.use('/notification', NotificationRoute);
 
 /**
  * Export App

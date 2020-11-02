@@ -10,7 +10,7 @@ const config = require('../Config');
  */
 exports.create_request = async (data) => {
     try {
-        let request = new Request();
+		let request = new Request();
 		
 		request.request_by = data.request_by;
         request.assign_to = data.assign_user;

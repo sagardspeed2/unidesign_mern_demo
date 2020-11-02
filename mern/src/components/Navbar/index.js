@@ -5,8 +5,8 @@ import {
 	Collapse
 } from 'reactstrap';
 import { NavLink } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBell } from '@fortawesome/free-solid-svg-icons';
+
+import { Notification } from '../Notification';
 
 import { userAction } from '../../_actions';
 
@@ -62,7 +62,7 @@ const TopNavbar = () => {
 								to="/request">Request (for Approval)</NavLink>
 						</NavItem>
 					</Nav>
-					<NavbarText className="notification__ico"><FontAwesomeIcon icon={faBell} /></NavbarText>
+					<NavbarText className="notification__ico"><Notification /></NavbarText>
 					<NavbarText className="ml-3 logout__btn" onClick={handle_logout}>Logout</NavbarText>
 				</Collapse>
 			</Navbar>

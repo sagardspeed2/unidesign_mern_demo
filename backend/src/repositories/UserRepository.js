@@ -7,6 +7,14 @@ const Department = mongoose.model('Department');
 const config = require('../Config');
 
 /**
+ * Get user by userid
+ */
+exports.get_user_by_user_id = async (_id) => {
+	return await User.findOne({_id: _id}, 'userId Username Email department CreatedAt')
+		.populate('department');
+}
+
+/**
  * Get a user by username
  */
 exports.get_user_by_userName = async(username) => {

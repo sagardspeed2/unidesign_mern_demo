@@ -1,6 +1,7 @@
 const config = require('../Config');
 
 const RequestRepository = require('../repositories/RequestRepository');
+const NotificationRepository = require('../repositories/NotificationRepository');
 
 /**
  * Create Request
@@ -14,6 +15,7 @@ exports.create_request = async (req, res, next) => {
 
 		const data = await RequestRepository.create_request(req.body);
         if (data) {
+			this.add_new_request_notification(req.body, data);
             res.status(201).send(data);
         } else {
             res.status(404).send({ message: 'Error on saving the Request!' });
@@ -46,11 +48,23 @@ exports.set_request_status = async (req, res, next) => {
 	try {
 		const data = await RequestRepository.set_request_status(req.body);
         if (data) {
+			await NotificationRepository.add_notification(req.body, data._id, 'Update Status');
             res.status(201).send(data);
         } else {
             res.status(404).send({ message: 'Error on updating the Request status!' });
         }
 	} catch (error) {
 		res.status(500).send({ message: 'Error on updating the Request status!', sysError: error.message });
+	}
+}
+
+/**
+ * Add new request notification
+ */
+exports.add_new_request_notification = async () => {
+	try {
+
+	} catch (error) {
+		throw error;
 	}
 }
