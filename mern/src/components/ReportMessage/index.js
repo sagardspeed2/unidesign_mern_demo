@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import './ReportMessage.scss';
 
 const ReportMessage = (data) => {
+	console.log(data)
 	return (
 		<>
 			<div className="p-3 d-flex">
