@@ -5,6 +5,7 @@ import { Container, Row, Col, Card, CardBody, CardTitle } from 'reactstrap';
 import DataTable from 'react-data-table-component';
 
 import { TopNavbar } from '../../components/Navbar';
+import { ReportMessage } from '../../components/ReportMessage';
 
 import { requestAction } from '../../_actions';
 
@@ -76,7 +77,10 @@ const PendingRequest = (props) => {
 										data={props.requests}
 										noHeader={true}
 										pagination={true}
-									/>
+										expandableRows
+										expandOnRowClicked
+										highlightOnHover
+										expandableRowsComponent={<ReportMessage />} />
 								</CardBody>
 							</Card>
 						</Col>

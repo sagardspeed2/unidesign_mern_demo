@@ -14,7 +14,7 @@
 	"homepage": "https://github.com/sagardspeed2/unidesign_mern_demo#readme",
     "scripts": {
 		"heroku-prebuild": "cd mern/ && npm install && npm run build",
-		"start": "cd mern/ && npm start"
+		"start": "cd mern/ && npm run start-client"
     },
     "cacheDirectories": [
         "mern/node_modules",
