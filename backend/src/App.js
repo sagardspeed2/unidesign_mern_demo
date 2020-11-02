@@ -1,6 +1,7 @@
 /**
  * Module dependencies
  */
+const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
@@ -13,6 +14,12 @@ const config = require('./Config');
  * Create Express App
  */
 const app = express();
+
+/**
+ * Serve the client
+ */
+const buildPath = path.join(__dirname, '../../mern', 'build');
+app.use(express.static(buildPath));
 
 /**
  * Set Bodyparser for app

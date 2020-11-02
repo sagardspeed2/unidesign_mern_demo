@@ -1,5 +1,5 @@
 const dev = {
-	apiHost: 'http://localhost:5000'
+	apiHost: ''
 };
 
 const config = {
