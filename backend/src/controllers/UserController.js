@@ -1,6 +1,6 @@
 const md5 = require('md5');
 
-const config = require('../config');
+const config = require('../Config');
 
 const ValidationContract = require('../_helpes/DataValidator');
 const AuthService = require('../services/AuthService');

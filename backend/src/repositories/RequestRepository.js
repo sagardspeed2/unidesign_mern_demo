@@ -3,7 +3,7 @@ const { ObjectId } = require('mongodb');
 
 const Request = mongoose.model('Request');
 
-const config = require('../config');
+const config = require('../Config');
 
 /**
  * Create new request

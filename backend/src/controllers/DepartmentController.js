@@ -1,4 +1,4 @@
-const config = require('../config');
+const config = require('../Config');
 
 const DepartmentRepository = require('../repositories/DepartmentRepository');
 

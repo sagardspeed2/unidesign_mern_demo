@@ -4,7 +4,7 @@ const { ObjectId } = require('mongodb');
 const User = mongoose.model('User');
 const Department = mongoose.model('Department');
 
-const config = require('../config');
+const config = require('../Config');
 
 /**
  * Get a user by username
