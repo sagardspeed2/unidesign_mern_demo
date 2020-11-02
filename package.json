@@ -1,0 +1,22 @@
+{
+    "name": "django-react-todo",
+    "version": "1.0.0",
+    "main": "index.js",
+    "repository": {
+		"type": "git",
+		"url": "git+https://github.com/sagardspeed2/unidesign_mern_demo.git"
+	},
+    "author": "Sagar Davara",
+    "license": "MIT",
+	"bugs": {
+		"url": "https://github.com/sagardspeed2/unidesign_mern_demo/issues"
+	},
+	"homepage": "https://github.com/sagardspeed2/unidesign_mern_demo#readme",
+    "scripts": {
+        "heroku-prebuild": "NODE_ENV=production cd mern/ && yarn install && yarn build && cd ../backend && yarn install && yarn start"
+    },
+    "cacheDirectories": [
+		"mern/node_modules",
+		"backend/node_modules"
+    ]
+}
