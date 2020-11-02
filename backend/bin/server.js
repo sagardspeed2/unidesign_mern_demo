@@ -4,7 +4,7 @@
  * Module dependencies.
  */
 
-const app = require('../src/app');
+const app = require('../src/App');
 const http = require('http');
 const debug = require('debug')('nodestr:server');
 const fs = require('fs');
